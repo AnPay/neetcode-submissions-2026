@@ -28,12 +28,17 @@ public:
         return instance;
     }
 
+     static Logger& getInstance() {
+        static Logger instance;  // 🔥 thread-safe (C++11+)
+        return instance;
+    }
+
     void log(string message) {
         cout << "Log: " << message << endl;
     }
 };
 // Static member initialization
-Logger* Logger::instance = nullptr;
+Logger* Logger::instance = nullptr;  //not needed if thread safe init is done in getInstance
 
 int main() {
     Logger* logger1 = Logger::getInstance();
